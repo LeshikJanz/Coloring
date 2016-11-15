@@ -5,11 +5,17 @@
 <script src="components/TableColor.js"></script>
 <!--<script src="components/main.js"></script>-->
 
+<!-- Ulogin -->
+<div id="uLogin" data-ulogin="display=panel;theme=classic;fields=first_name,last_name;providers=vkontakte,odnoklassniki,mailru,facebook;hidden=other;redirect_uri=localhost%3A3000%2Fsocket;mobilebuttons=0;callback=preview;"></div>
+<!-- end -->
+
+
 <script>
     var socket = io();
     var Building = myApp.Building;
     var building = new Building('#main');
 
+    var uloginParameters = "";
     var currentState = "";
 
     var data = "firstTime";
@@ -23,7 +29,7 @@
         tableColor.onColorSelected(function (color) {
             building.setColor(color);
             building.onElementSelected(function (elem) {
-
+                alert("Закрасил " + uloginParameters.first_name);
                 var objForSending = {
                     id: elem.id,
                     color : color
@@ -54,5 +60,16 @@
             m = JSON.parse(m);
             building.fillElement(m.id, m.color);
         }
+    }
+
+    function getUloginParameters(myData){
+        uloginParameters = myData;
+    }
+
+    function preview(token){
+        $.getJSON("//ulogin.ru/token.php?host=" + encodeURIComponent(location.toString()) + "&token=" + token + "&callback=?", function(data){
+            data = $.parseJSON(data.toString());
+            getUloginParameters(data);
+        });
     }
 </script>

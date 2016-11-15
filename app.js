@@ -41,16 +41,26 @@ var MongoStore = require('connect-mongo')(session);
 /* Работает с сессиями. Создает уникальный идентификатор для сессии, по кот будут восстановлены данные
  *  этой сессии.
  * */
-//app.use(session({
-//      secret: config.get("session:secret"),        //исп. для создания цифровой подписи.не передается посетителю
-//      name: config.get("session:key"),
-//      cookie: config.get("session:cookie"),
-//      saveUninitialized: false,
-//      resave: false,
-//      store: new MongoStore({mongooseConnection: mongoose.connection})
-//    })
-//);
+app.use(session({
+      secret: config.get("session:secret"),        //исп. для создания цифровой подписи.не передается посетителю
+      name: config.get("session:key"),
+      cookie: config.get("session:cookie"),
+      saveUninitialized: false,
+      resave: false,
+      store: new MongoStore({mongooseConnection: mongoose.connection})
+    })
+);
 
+app.get('/removeSession', function(req, res, next){
+  req.session.destroy();
+  res.send("Сессия удалена (вы разлогинились)");
+});
+
+app.get('/session', function(req, res, next){
+  req.session.login = "Alexey";
+  req.session.numberOfVisits = req.session.numberOfVisits + 1 || 1;
+  res.send("" + req.session.numberOfVisits + '\n' + req.session.login);
+});
 
 var routes = require('./routes/index')(app);  //объект сервера передается во все контроллеры(все подключенное выше доступно везде)
 
@@ -61,15 +71,8 @@ server.listen(config.get('port'), function(){
   log.info('Express app is listening on ' + config.get('port'));
 });
 
-//app.get("/socket", function(req, res, next){
-//  res.render('socket');
-//});
-//
-
-
 //Попробовать перенести socket.js
 runSocketIO();
-
 
 app.use(function(req, res, next){ //замыкающий обработчик
   res.status(404).send("Page not found");
@@ -77,6 +80,7 @@ app.use(function(req, res, next){ //замыкающий обработчик
 
 
 var currentState = [];
+
 function runSocketIO(){
   var io = require('socket.io').listen(server);
 
