@@ -1,0 +1,58 @@
+<% layout("layout/page") %>
+<% include partial/svgPartial %>
+
+<script src="components/Building.js"></script>
+<script src="components/TableColor.js"></script>
+<!--<script src="components/main.js"></script>-->
+
+<script>
+    var socket = io();
+    var Building = myApp.Building;
+    var building = new Building('#main');
+
+    var currentState = "";
+
+    var data = "firstTime";
+    socket.emit('client message', data);
+
+    (function () {
+        var TableColor = myApp.TableColor;
+
+        var tableColor = new TableColor('.table');
+
+        tableColor.onColorSelected(function (color) {
+            building.setColor(color);
+            building.onElementSelected(function (elem) {
+
+                var objForSending = {
+                    id: elem.id,
+                    color : color
+                };
+                data = JSON.stringify(objForSending);
+
+                socket.emit('client message', data);
+
+            });
+
+        });
+    })();
+
+    socket.on('server message', function(msg) {
+        if(msg == "") return;
+
+        if(Array.isArray(msg)) {
+            runFirstTimeClient(msg);
+            return;
+        }
+
+        msg = JSON.parse(msg);
+        building.fillElement(msg.id, msg.color);
+    });
+
+    function runFirstTimeClient(msg){
+        for(let m of msg){
+            m = JSON.parse(m);
+            building.fillElement(m.id, m.color);
+        }
+    }
+</script>

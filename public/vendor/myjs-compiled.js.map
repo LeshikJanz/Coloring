@@ -1,0 +1,1 @@
+{"version":3,"sources":["myjs.js"],"names":[],"mappings":";;;;;AAGA,KAAK,CAAC,OAAO,CAAC,CAAC","file":"myjs-compiled.js","sourcesContent":["/**\n * Created by alex on 10/30/16.\n */\nalert(\"HELLO\");"]}

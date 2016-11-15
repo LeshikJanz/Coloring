@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.js"],"names":[],"mappings":";;AAAA,QAAQ,CAAC,cAAc,CAAC,MAAM,CAAC,CAAC,SAAS,GAAG,kBAAkB,CAAC","file":"index-compiled.js","sourcesContent":["document.getElementById('root').innerHTML = \"Привет, я готов.\";"]}

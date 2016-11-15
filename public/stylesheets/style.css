@@ -1,0 +1,120 @@
+.none {
+  display: none !important;
+}
+
+body {
+  background: rgba(0, 102, 255, 0.38);
+  font-family: sans-serif;
+}
+
+p {
+  margin: 0 0 5px;
+}
+
+.article {
+  background: #FFF;
+  border: 1px solid rgba(0, 89, 181, 0.82);
+  width: 600px;
+  margin: 0 0 5px;
+  box-shadow: 2px 2px 5px -1px rgb(0, 81, 202);
+  padding: 3px 5px;
+}
+
+.news__author {
+  text-decoration: underline;
+  color: #007DDC;
+}
+.news__count {
+  margin: 10px 0 0 0;
+  display: block;
+}
+
+
+.contacts {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.search-field {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.contacts-list {
+  padding: 0;
+  width: 100%;
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+  font-family: sans-serif;
+  width: 100%;
+  padding: 5px;
+  border-bottom: 1px dotted grey;
+}
+
+.contact-image {
+  border-radius: 50%;
+  margin: 5px;
+}
+
+.contact-name {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.contact-number {
+  font-size: 18px;
+  color: grey;
+}
+
+.svg {
+  width: 600px;
+}
+
+.first-line div, .second-line div {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  border-radius: 15px;
+  border: 1px solid white;
+}
+
+.first-line div:hover, .second-line div:hover {
+  border: 1px solid red;
+  transition: 1s;
+}
+
+.red {
+  background: #FF0000;
+}
+
+.green {
+  background: #008000;
+}
+
+.yellow {
+  background: #FFFF00;
+}
+
+.blue {
+  background: #0000FF;
+}
+
+.brown {
+  background: #A52A2A;
+}
+
+.aqua {
+  background: #00FFFF;
+}
+
+.orange {
+  background: #FFA500;
+}
+
+.purple {
+  background: #800080;
+}
