@@ -50,17 +50,17 @@ app.use(session({
       store: new MongoStore({mongooseConnection: mongoose.connection})
     })
 );
-
-app.get('/removeSession', function(req, res, next){
-  req.session.destroy();
-  res.send("Сессия удалена (вы разлогинились)");
-});
-
-app.get('/session', function(req, res, next){
-  req.session.login = "Alexey";
-  req.session.numberOfVisits = req.session.numberOfVisits + 1 || 1;
-  res.send("" + req.session.numberOfVisits + '\n' + req.session.login);
-});
+//
+//app.get('/removeSession', function(req, res, next){
+//  req.session.destroy();
+//  res.send("Сессия удалена (вы разлогинились)");
+//});
+//
+//app.get('/session', function(req, res, next){
+//  req.session.login = "Alexey";
+//  req.session.numberOfVisits = req.session.numberOfVisits + 1 || 1;
+//  res.send("" + req.session.numberOfVisits + '\n' + req.session.login);
+//});
 
 var routes = require('./routes/index')(app);  //объект сервера передается во все контроллеры(все подключенное выше доступно везде)
 

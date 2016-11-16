@@ -6,7 +6,9 @@
 <!--<script src="components/main.js"></script>-->
 
 <!-- Ulogin -->
-<div id="uLogin" data-ulogin="display=panel;theme=classic;fields=first_name,last_name;providers=vkontakte,odnoklassniki,mailru,facebook;hidden=other;redirect_uri=localhost%3A3000%2Fsocket;mobilebuttons=0;callback=preview;"></div>
+<!--<div id="uLogin" data-ulogin="display=panel;theme=classic;fields=first_name,last_name;providers=vkontakte,odnoklassniki,mailru,facebook;hidden=other;redirect_uri=localhost%3A3000%2Fsocket;mobilebuttons=0;callback=preview;"></div>-->
+<div id="authorization"></div>
+<button id="exitButton" onclick="exitFromAccount()"> Выйти </button>
 <!-- end -->
 
 
@@ -20,6 +22,7 @@
 
     var data = "firstTime";
     socket.emit('client message', data);
+    showUloginOrAutorization();
 
     (function () {
         var TableColor = myApp.TableColor;
@@ -29,15 +32,15 @@
         tableColor.onColorSelected(function (color) {
             building.setColor(color);
             building.onElementSelected(function (elem) {
-                alert("Закрасил " + uloginParameters.first_name);
                 var objForSending = {
                     id: elem.id,
-                    color : color
+                    color : color,
+                    first_name: uloginParameters.first_name,
+                    last_name: uloginParameters.last_name,
+                    uid: uloginParameters.uid
                 };
                 data = JSON.stringify(objForSending);
-
                 socket.emit('client message', data);
-
             });
 
         });
@@ -70,6 +73,54 @@
         $.getJSON("//ulogin.ru/token.php?host=" + encodeURIComponent(location.toString()) + "&token=" + token + "&callback=?", function(data){
             data = $.parseJSON(data.toString());
             getUloginParameters(data);
+            sendAuthorizationInfo(data);
+            $('.ulogin-buttons-container').attr("style", "display: none");
+            $('#authorization').attr("style", "display: block");
+            $('#authorization').html("<h5>Здравствуйте, " + data.first_name + ' ' + data.last_name + "<br/>Ваш uid:" + data.uid + "</h5>");
+            $('#exitButton').attr("style", "display: block");
         });
+    }
+
+    function sendAuthorizationInfo(data){
+        $.ajax({
+            url: "/socket",
+            method: "POST",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function(xhr){
+                console.log("Ajax has succeeded");
+            },
+            error: function(xhr){
+                console.log("Some ajax errors");
+            }
+        })
+        return false;
+    }
+
+    function showUloginOrAutorization(){
+        if("<%- uid%>" == ""){
+            $('body').append('<div id="uLogin" data-ulogin="display=panel;theme=classic;fields=first_name,last_name;providers=vkontakte,odnoklassniki,mailru,facebook;redirect_uri=localhost%3A3000%2Fsocket;mobilebuttons=0;callback=preview;"></div>');
+            //$('.ulogin-buttons-container').attr("style", "display: none");
+        }else {
+            $('#authorization').html("<h5>Здравствуйте, <%-firstName + ' ' + lastName%><br/>Ваш uid: <%-uid%></h5>");
+            $('#exitButton').attr("style", "display: block");
+        }
+    }
+
+    function exitFromAccount(){
+        $.ajax({
+            url: "/removeSession",
+            method: "POST",
+            data: "",
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function(xhr){
+                console.log("Ajax has succeeded");
+            },
+            error: function(xhr){
+                console.log("Some ajax errors");
+            }
+        })
+        location.reload();
+        return false;
     }
 </script>
