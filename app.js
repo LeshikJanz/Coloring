@@ -66,9 +66,10 @@ var routes = require('./routes/index')(app);  //объект сервера пе
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-var server = http.createServer(app)
-server.listen(config.get('port'), function(){
-  log.info('Express app is listening on ' + config.get('port'));
+var server = http.createServer(app);
+var port = process.env.PORT || config.get('port');
+server.listen(port, function(){
+  log.info('Express app is listening on ' + port);
 });
 
 //Попробовать перенести socket.js
