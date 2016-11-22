@@ -9,6 +9,21 @@
 <!--<div id="uLogin" data-ulogin="display=panel;theme=classic;fields=first_name,last_name;providers=vkontakte,odnoklassniki,mailru,facebook;hidden=other;redirect_uri=localhost%3A3000%2Fsocket;mobilebuttons=0;callback=preview;"></div>-->
 <div id="authorization"></div>
 <button id="exitButton" onclick="exitFromAccount()"> Выйти </button>
+<button id="saveSvgButton" onclick="saveSvg()"> Сохранить svg </button>
+
+
+<script>
+    function saveSvg(){
+        //get svg element.
+        var svg = document.getElementById("main");
+        //console.log(svg);
+
+//get svg source.
+        var serializer = new XMLSerializer();
+        var source = serializer.serializeToString(svg);
+        console.log(source);
+    }
+</script>
 <!-- end -->
 
 
