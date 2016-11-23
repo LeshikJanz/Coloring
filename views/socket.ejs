@@ -2,6 +2,7 @@
 <% include partial/svgPartial %>
 <% include partial/svg_copy/svgPartialCopy %>
 
+<script src="components/Button.js"></script>
 <script src="components/Building.js"></script>
 <script src="components/TableColor.js"></script>
 <!--<script src="components/main.js"></script>-->
@@ -10,8 +11,21 @@
 <!--<div id="uLogin" data-ulogin="display=panel;theme=classic;fields=first_name,last_name;providers=vkontakte,odnoklassniki,mailru,facebook;hidden=other;redirect_uri=localhost%3A3000%2Fsocket;mobilebuttons=0;callback=preview;"></div>-->
 <div id="authorization"></div>
 <button id="exitButton" onclick="exitFromAccount()"> Выйти </button>
-<button id="saveSvgButton" onclick="saveSvg()"> Сохранить svg </button>
+<button id="getSvgButton" onclick="getSvg()"> Сохранить svg </button>
+<button id="getCurrentStateButton" onclick="getCurrentState()"> Запуск чего-то </button>
+<button id="clearingButton" onclick="clearFilling()"> Очистить картинку </button>
+<button id="fillUserImage" onclick="fillUserImage()"> Получить свою картинку </button>
 
+
+<script>
+    function clearFilling(){
+        var mainCopy = document.getElementById("main");
+        var length = mainCopy.children.length;
+        for (var i = 0; i < length; i++) {
+            mainCopy.children[i].setAttribute('fill', "");
+        }
+    }
+</script>
 
 <script>
     var socket = io();
@@ -19,6 +33,8 @@
     var building = new Building('#main');
     var building2 = new Building('#main_copy');
 
+    var Button = myApp.Button;
+    var button = new Button('#hideColors', '.table');
 
     var uloginParameters = "";
     var currentState = "";
@@ -70,6 +86,7 @@
 
     function getUloginParameters(myData){
         uloginParameters = myData;
+        console.log(uloginParameters);
     }
 
     function preview(token){
@@ -128,7 +145,7 @@
     }
 
 
-    function saveSvg(){
+    function getSvg(){
         //get svg element.
         var svg = document.getElementById("main_copy");
         //console.log(svg);
@@ -141,4 +158,43 @@
         console.log("firstName: " + "<%- firstName%>");
         console.log("lastName: " + "<%- lastName%>");
     }
+
+    function setCurrentState(currState){
+        currentState = currState;
+    }
+
+    function getCurrentState(){
+        $.ajax({
+            url: "/currentState",
+            method: "POST",
+            data: "",
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function(xhr){
+                setCurrentState(xhr);
+                console.log("Ajax has succeeded");
+            },
+            error: function(xhr){
+                console.log("Some ajax errors");
+            }
+        })
+        console.log(currentState);
+        return false;
+    }
+
+    function fillUserImage() { //получает картинку текущего пользователя
+        getCurrentState();
+        //console.log(currentState);
+        //currentState = JSON.parse(currentState);
+        clearFilling();
+        setTimeout(function(){
+            for (var obj of currentState) {
+                obj = JSON.parse(obj);
+                if (uloginParameters.uid == obj.uid) {
+                    building.fillElement(obj.id, obj.color);
+                }
+            }
+        }, 1000); //можно увеличить таймер, если вдруг не успеет принять данные с сервера
+    }
+
+
 </script>

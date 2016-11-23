@@ -80,6 +80,7 @@ app.use(function(req, res, next){ //замыкающий обработчик
 });
 
 
+
 var currentState = [];
 
 function runSocketIO(){
@@ -97,6 +98,7 @@ function runSocketIO(){
   });
 }
 
+app.currentState = currentState;
 
 module.exports = app;
 module.exports.io = io;

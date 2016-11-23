@@ -1,148 +1,203 @@
 .none {
-  display: none !important;
+    display: none !important;
 }
 
 body {
-  background: rgba(0, 102, 255, 0.38);
-  font-family: sans-serif;
+    background: rgba(0, 102, 255, 0.38);
+    font-family: sans-serif;
 }
 
 p {
-  margin: 0 0 5px;
+    margin: 0 0 5px;
 }
 
 .article {
-  background: #FFF;
-  border: 1px solid rgba(0, 89, 181, 0.82);
-  width: 600px;
-  margin: 0 0 5px;
-  box-shadow: 2px 2px 5px -1px rgb(0, 81, 202);
-  padding: 3px 5px;
+    background: #FFF;
+    border: 1px solid rgba(0, 89, 181, 0.82);
+    width: 600px;
+    margin: 0 0 5px;
+    box-shadow: 2px 2px 5px -1px rgb(0, 81, 202);
+    padding: 3px 5px;
 }
 
 .news__author {
-  text-decoration: underline;
-  color: #007DDC;
+    text-decoration: underline;
+    color: #007DDC;
 }
 
 .news__count {
-  margin: 10px 0 0 0;
-  display: block;
+    margin: 10px 0 0 0;
+    display: block;
 }
 
 .contacts {
-  width: 300px;
-  margin: 0 auto;
+    width: 300px;
+    margin: 0 auto;
 }
 
 .search-field {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
 }
 
 .contacts-list {
-  padding: 0;
-  width: 100%;
+    padding: 0;
+    width: 100%;
 }
 
 .contact {
-  display: flex;
-  align-items: center;
-  font-family: sans-serif;
-  width: 100%;
-  padding: 5px;
-  border-bottom: 1px dotted grey;
+    display: flex;
+    align-items: center;
+    font-family: sans-serif;
+    width: 100%;
+    padding: 5px;
+    border-bottom: 1px dotted grey;
 }
 
 .contact-image {
-  border-radius: 50%;
-  margin: 5px;
+    border-radius: 50%;
+    margin: 5px;
 }
 
 .contact-name {
-  font-size: 20px;
-  font-weight: bold;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .contact-number {
-  font-size: 18px;
-  color: grey;
+    font-size: 18px;
+    color: grey;
 }
 
 .svg {
-  width: 600px;
+    width: 600px;
 }
 
-.table div {
-  display: inline-block;
-  width: 25px;
-  height: 25px;
-  border-radius: 15px;
+body .table {
+    min-height: 100px;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    align-items: center;
+}
+
+.circle {
+    background-color: #FFFFFF;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    border: 10px solid;
 }
 
 .table div:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .red {
-  background: #FF0000;
-}
-
-.green {
-  background: #008000;
-}
-
-.yellow {
-  background: #FFFF00;
-}
-
-.blue {
-  background: #0000FF;
-}
-
-.brown {
-  background: #A52A2A;
-}
-
-.aqua {
-  background: #00FFFF;
+    border-color: #D0021B;
 }
 
 .orange {
-  background: #FFA500;
+    border-color: #F5A623;
+}
+
+.yellow {
+    border-color: #F8E71C;
+}
+
+.brown {
+    border-color: #8B572A;
+}
+
+.asidGreen {
+    border-color: #7ED321;
+}
+
+.green {
+    border-color: #417505;
+}
+
+.pink {
+    border-color: #BD10E0;
 }
 
 .purple {
-  background: #800080;
+    border-color: #9013FE;
 }
 
-#uLogin {
-  position: absolute;
-!important;
-  top: 0;
-  right: 0;
+.brightBlue {
+    border-color: #4A90E2;
+}
+
+.turquoise {
+    border-color: #50E3C2;
+}
+
+.lime {
+    border-color: #00FF96;
+}
+
+.lightGreen {
+    border-color: #B8E986;
+}
+
+.lightRed {
+    border-color: #FF4F4F;
+}
+
+.lightBlue {
+    border-color: #4A90E2;
+}
+
+.lightOrange {
+    border-color: #FFC700;
+}
+
+.asidRed {
+    border-color: #FF001A;
+}
+
+.blue {
+    border-color: #0076FF;
+}
+
+.greyBlue {
+    border-color: #B2D8D6;
 }
 
 .active {
-  border: 2px solid black;
+    border-width: 15px;
+    transition: 0.1s;
 }
 
-#uLogin{
-  position: absolute;
-  top: 0px;
-  right: 0px;
+#uLogin {
+    position: absolute;
+!important;
+    top: 0;
+    right: 0;
 }
 
-#authorization{
-  position: absolute;
-  top: 0px;
-  right: 20px;
+/* display none authorization*/
+
+#uLogin {
+    /*display: none;*/
+    position: absolute;
+    top: 0px;
+    right: 0px;
 }
 
-#exitButton{
-  position: absolute;
-  top: 50px;
-  right: 20px;
-  display: none;
+#authorization {
+    position: absolute;
+    top: 0px;
+    right: 20px;
+}
+
+#exitButton {
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    display: none;
 }
