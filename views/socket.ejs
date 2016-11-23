@@ -1,5 +1,6 @@
 <% layout("layout/page") %>
 <% include partial/svgPartial %>
+<% include partial/svg_copy/svgPartialCopy %>
 
 <script src="components/Building.js"></script>
 <script src="components/TableColor.js"></script>
@@ -13,24 +14,11 @@
 
 
 <script>
-    function saveSvg(){
-        //get svg element.
-        var svg = document.getElementById("main");
-        //console.log(svg);
-
-//get svg source.
-        var serializer = new XMLSerializer();
-        var source = serializer.serializeToString(svg);
-        console.log(source);
-    }
-</script>
-<!-- end -->
-
-
-<script>
     var socket = io();
     var Building = myApp.Building;
     var building = new Building('#main');
+    var building2 = new Building('#main_copy');
+
 
     var uloginParameters = "";
     var currentState = "";
@@ -137,5 +125,20 @@
         })
         location.reload();
         return false;
+    }
+
+
+    function saveSvg(){
+        //get svg element.
+        var svg = document.getElementById("main_copy");
+        //console.log(svg);
+
+        //get svg source.
+        var serializer = new XMLSerializer();
+        var source = serializer.serializeToString(svg);
+        //console.log(source);
+        console.log("uid: " + "<%- uid%>");
+        console.log("firstName: " + "<%- firstName%>");
+        console.log("lastName: " + "<%- lastName%>");
     }
 </script>
