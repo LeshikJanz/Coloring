@@ -88,10 +88,16 @@ function runSocketIO(){
 
   io.on('connection', function(socket){
     socket.on('client message', function(msg){
+
       if(msg == "firstTime") {
         io.emit('server message', currentState);
         return;
       }
+        msg = JSON.parse(msg);
+        msg.individualKey = socket.id;
+
+        msg = JSON.stringify(msg);
+        console.log(msg);
       currentState.push(msg);
       io.emit('server message', msg);
     });

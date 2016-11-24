@@ -38,6 +38,7 @@
 <div class="ya-share2" data-services="collections,vkontakte,facebook,odnoklassniki,moimir"></div>
 <br/><br/><br/>
 
+
 <script>
 
     function clearFilling(){
@@ -63,6 +64,7 @@
 
     var data = "firstTime";
     socket.emit('client message', data);
+    var individualKey = "";
     showUloginOrAutorization();
 
     (function () {
@@ -78,8 +80,7 @@
                     color : color,
                     first_name: uloginParameters.first_name,
                     last_name: uloginParameters.last_name,
-                    uid: uloginParameters.uid,
-                    individualKey: Math.random().toString(36).substring(2)
+                    uid: uloginParameters.uid
                 };
                 data = JSON.stringify(objForSending);
                 socket.emit('client message', data);
@@ -95,7 +96,7 @@
             runFirstTimeClient(msg);
             return;
         }
-
+        individualKey = socket.id;
         msg = JSON.parse(msg);
         building.fillElement(msg.id, msg.color);
     });
@@ -209,13 +210,17 @@
         setTimeout(function(){
             for (var obj of currentState) {
                 obj = JSON.parse(obj);
-                if (uloginParameters.uid == obj.uid) {
+                if (individualKey == obj.individualKey) {
                     building2.fillElement(obj.id, obj.color);  //поменять building
                 }
             }
         }, 1000); //можно увеличить таймер, если вдруг не успеет принять данные с сервера
 
         getSvg();
+    }
+
+    function createIndividualSvgFile(svgId){
+
     }
 
 </script>
