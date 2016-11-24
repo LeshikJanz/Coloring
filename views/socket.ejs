@@ -78,7 +78,8 @@
                     color : color,
                     first_name: uloginParameters.first_name,
                     last_name: uloginParameters.last_name,
-                    uid: uloginParameters.uid
+                    uid: uloginParameters.uid,
+                    individualKey: Math.random().toString(36).substring(2)
                 };
                 data = JSON.stringify(objForSending);
                 socket.emit('client message', data);

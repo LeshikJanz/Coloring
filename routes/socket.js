@@ -1,4 +1,5 @@
 exports.get = function(req, res, next){
+    console.log(req.query.id);
     res.render('socket', {firstName: req.session.firstName, lastName: req.session.lastName, uid: req.session.uid});
 }
 
