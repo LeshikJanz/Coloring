@@ -1,10 +1,21 @@
 <% layout("layout/page") %>
+
 <% include partial/svgPartial %>
 <% include partial/svg_copy/svgPartialCopy %>
 
 <script src="components/Button.js"></script>
 <script src="components/Building.js"></script>
 <script src="components/TableColor.js"></script>
+
+<!--<div id="fb-root"></div>  &lt;!&ndash;Поделиться в facebook&ndash;&gt;-->
+<!--<script>(function(d, s, id) {-->
+        <!--var js, fjs = d.getElementsByTagName(s)[0];-->
+        <!--if (d.getElementById(id)) return;-->
+        <!--js = d.createElement(s); js.id = id;-->
+        <!--js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.8";-->
+        <!--fjs.parentNode.insertBefore(js, fjs);-->
+    <!--}(document, 'script', 'facebook-jssdk'));</script>-->
+<!--<script type="text/javascript" src="https://vk.com/js/api/share.js?94" charset="windows-1251"></script>-->
 <!--<script src="components/main.js"></script>-->
 
 <!-- Ulogin -->
@@ -15,9 +26,20 @@
 <button id="getCurrentStateButton" onclick="getCurrentState()"> Запуск чего-то </button>
 <button id="clearingButton" onclick="clearFilling()"> Очистить картинку </button>
 <button id="fillUserImage" onclick="fillUserImage()"> Получить свою картинку </button>
+<!--<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Поделиться</a></div>-->
+<!-- Put this script tag to the place, where the Share button will be -->
+<!--<script type="text/javascript">-->
+    <!--document.write(VK.Share.button(true,{type: "round", text: "Поделиться"}));-->
+<!--</script>-->
 
+<br/><br/>
+<script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+<script src="//yastatic.net/share2/share.js"></script>
+<div class="ya-share2" data-services="collections,vkontakte,facebook,odnoklassniki,moimir"></div>
+<br/><br/><br/>
 
 <script>
+
     function clearFilling(){
         var mainCopy = document.getElementById("main");
         var length = mainCopy.children.length;
@@ -153,10 +175,7 @@
         //get svg source.
         var serializer = new XMLSerializer();
         var source = serializer.serializeToString(svg);
-        //console.log(source);
-        console.log("uid: " + "<%- uid%>");
-        console.log("firstName: " + "<%- firstName%>");
-        console.log("lastName: " + "<%- lastName%>");
+        console.log(source);
     }
 
     function setCurrentState(currState){
@@ -190,11 +209,12 @@
             for (var obj of currentState) {
                 obj = JSON.parse(obj);
                 if (uloginParameters.uid == obj.uid) {
-                    building.fillElement(obj.id, obj.color);
+                    building2.fillElement(obj.id, obj.color);  //поменять building
                 }
             }
         }, 1000); //можно увеличить таймер, если вдруг не успеет принять данные с сервера
-    }
 
+        getSvg();
+    }
 
 </script>
