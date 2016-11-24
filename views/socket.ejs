@@ -48,6 +48,13 @@
             mainCopy.children[i].setAttribute('fill', "");
         }
     }
+
+    function fillElement(id, color) {
+        if (color) {
+           //document.getElementById('id').setAttribute('fill', color);
+            $('#' + id).attr("fill", color);
+        }
+    }
 </script>
 
 <script>
@@ -171,7 +178,7 @@
 
     function getSvg(){
         //get svg element.
-        var svg = document.getElementById("main_copy");
+        var svg = document.getElementById("main");
         //console.log(svg);
 
         //get svg source.
@@ -211,16 +218,39 @@
             for (var obj of currentState) {
                 obj = JSON.parse(obj);
                 if (individualKey == obj.individualKey) {
-                    building2.fillElement(obj.id, obj.color);  //поменять building
+                    fillElement(obj.id, obj.color);
+                    //building.fillElement(obj.id, obj.color);  //поменять building
                 }
             }
+            getSvg();
+            //sendRequestOnCreatingNewIndividualPage();  //доделать, чтобы отправлялись большие объемы
         }, 1000); //можно увеличить таймер, если вдруг не успеет принять данные с сервера
-
-        getSvg();
     }
 
-    function createIndividualSvgFile(svgId){
+    function sendRequestOnCreatingNewIndividualPage(){
+        var svg = document.getElementById("main");
+        //console.log(svg);
 
+        //get svg source.
+        var serializer = new XMLSerializer();
+        var source = serializer.serializeToString(svg);
+        var ajaxObj = {
+            svg: source
+        }
+        ajaxObj = JSON.stringify(ajaxObj);
+
+        $.ajax({
+            url: "/createSvgFile",
+            method: "POST",
+            data:  ajaxObj,
+            contentType: false,
+            success: function(xhr){
+                console.log("Ajax has succeeded");
+            },
+            error: function(xhr){
+                console.log("Some ajax errors");
+            }
+        })
     }
 
 </script>
