@@ -1,85 +1,60 @@
-.none {
-    display: none !important;
+@font-face {
+    font-family: "FuturaRoundBold";
+    src: url("../fonts/FuturaRoundBold/FuturaRoundBold.eot");
+    src: url("../fonts/FuturaRoundBold/FuturaRoundBold.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/FuturaRoundBold/FuturaRoundBold.woff") format("woff"),
+    url("../fonts/FuturaRoundBold/FuturaRoundBold.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
 }
 
-body {
-    background: rgba(0, 102, 255, 0.38);
-    font-family: sans-serif;
-}
+/*html body{*/
+/*background: #000;*/
+/*opacity: 0.3;*/
+/*}*/
 
-p {
-    margin: 0 0 5px;
-}
-
-.article {
-    background: #FFF;
-    border: 1px solid rgba(0, 89, 181, 0.82);
-    width: 600px;
-    margin: 0 0 5px;
-    box-shadow: 2px 2px 5px -1px rgb(0, 81, 202);
-    padding: 3px 5px;
-}
-
-.news__author {
-    text-decoration: underline;
-    color: #007DDC;
-}
-
-.news__count {
-    margin: 10px 0 0 0;
-    display: block;
-}
-
-.contacts {
-    width: 300px;
-    margin: 0 auto;
-}
-
-.search-field {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-}
-
-.contacts-list {
-    padding: 0;
-    width: 100%;
-}
-
-.contact {
-    display: flex;
-    align-items: center;
-    font-family: sans-serif;
-    width: 100%;
-    padding: 5px;
-    border-bottom: 1px dotted grey;
-}
-
-.contact-image {
-    border-radius: 50%;
-    margin: 5px;
-}
-
-.contact-name {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.contact-number {
-    font-size: 18px;
-    color: grey;
-}
-
+/*main*/
 .svg {
     width: 600px;
 }
 
-body .table {
+.logo {
+    font-size: 40px;
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    font-family: "FuturaRoundBold";
+    font-weight: bold;
+    padding-top: 10px;
+    text-align: center;
+    background: #00FF96;
+    color: white;
+    margin-left: 50%;
+    margin-top: 20px;
+    position: fixed;
+}
+
+.logo:hover {
+    cursor: pointer;
+}
+
+.logo::selection {
+    background: none;
+}
+
+.table {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+}
+
+.tableColor {
     min-height: 100px;
     margin-bottom: 0;
     display: flex;
+    width: 90%;
     justify-content: space-around;
-    position: absolute;
     align-items: center;
 }
 
@@ -173,15 +148,236 @@ body .table {
     transition: 0.1s;
 }
 
-#uLogin {
+#hideColors {
+    background: #fff;
+    border: none;
+    outline: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    font-family: 'Roboto', sans-serif;
+    color: #000;
+}
+
+#hideColors:hover {
+    cursor: pointer;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+.footer {
+    font-family: 'Roboto', sans-serif;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.socialWrap {
+    margin: 0;
+    position: relative;
+    margin-left: 3%;
+}
+
+.socialWrap2 {
+    margin: 0;
+    position: relative;
+    margin-left: 3%;
+}
+
+.share {
+    margin: 0;
+    padding: 6px 12px;
+    border: 1px none;
+    border-radius: 100px;
+    background: #fff;
+}
+
+.share::selection {
+    background: none;
+}
+
+.connect::selection {
+    background: none;
+}
+
+.social {
+    width: 100px;
     position: absolute;
-!important;
+    bottom: 0;
+    left: 100%;
+}
+
+.social2 {
+    width: 100px;
+    position: absolute;
+    bottom: 0;
+    left: 100%;
+}
+
+.fb {
+    margin: 0 10px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    background-color: #3C5A96;
+    height: 35px;
+    width: 35px;
+    display: inline-block;
+    padding-top: 6px;
+    border-radius: 17px;
+    color: #fff;
+}
+
+.fb:hover, .vk:hover {
+    cursor: pointer;
+}
+
+.vk {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    height: 35px;
+    width: 35px;
+    display: inline-block;
+    padding-top: 6px;
+    border-radius: 17px;
+    color: #fff;
+    background-color: #517398;
+}
+
+.connect {
+    margin: 0;
+    padding: 6px 12px;
+    border: 1px none;
+    border-radius: 100px;
+    background: #fff;
+}
+
+.pay {
+    padding: 6px 12px;
+    border: 1px none;
+    border-radius: 100px;
+    background: #000;
+    margin-right: 3%;
+    color: #fff;
+}
+
+.bye {
+    display: none;
+    width: 380px;
+    height: 100%;
+    position: fixed;
     top: 0;
     right: 0;
 }
 
-/* display none authorization*/
+.picture {
+    height: 50%;
+    background: yellow;
+}
 
+.info {
+    height: 50%;
+    background: red;
+}
+
+
+.share:hover, .connect:hover, .pay:hover {
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.5s;
+}
+
+/*main*/
+
+/*.none {*/
+/*display: none !important;*/
+/*}*/
+
+/*body {*/
+/*background: rgba(0, 102, 255, 0.38);*/
+/*font-family: sans-serif;*/
+/*}*/
+
+/*p {*/
+/*margin: 0 0 5px;*/
+/*}*/
+
+/*.article {*/
+/*background: #FFF;*/
+/*border: 1px solid rgba(0, 89, 181, 0.82);*/
+/*width: 600px;*/
+/*margin: 0 0 5px;*/
+/*box-shadow: 2px 2px 5px -1px rgb(0, 81, 202);*/
+/*padding: 3px 5px;*/
+/*}*/
+
+/*.news__author {*/
+/*text-decoration: underline;*/
+/*color: #007DDC;*/
+/*}*/
+
+/*.news__count {*/
+/*margin: 10px 0 0 0;*/
+/*display: block;*/
+/*}*/
+
+/*.contacts {*/
+/*width: 300px;*/
+/*margin: 0 auto;*/
+/*}*/
+
+/*.search-field {*/
+/*width: 100%;*/
+/*padding: 10px;*/
+/*font-size: 16px;*/
+/*}*/
+
+/*.contacts-list {*/
+/*padding: 0;*/
+/*width: 100%;*/
+/*}*/
+
+/*.contact {*/
+/*display: flex;*/
+/*align-items: center;*/
+/*font-family: sans-serif;*/
+/*width: 100%;*/
+/*padding: 5px;*/
+/*border-bottom: 1px dotted grey;*/
+/*}*/
+
+/*.contact-image {*/
+/*border-radius: 50%;*/
+/*margin: 5px;*/
+/*}*/
+
+/*.contact-name {*/
+/*font-size: 20px;*/
+/*font-weight: bold;*/
+/*}*/
+
+/*.contact-number {*/
+/*font-size: 18px;*/
+/*color: grey;*/
+/*}*/
+
+/*#uLogin {*/
+/*position: absolute;*/
+/*!important;*/
+/*top: 0;*/
+/*right: 0;*/
+/*}*/
+
+/* display none authorization*/
 #uLogin {
     display: none;
     position: absolute;
@@ -189,15 +385,20 @@ body .table {
     right: 0px;
 }
 
-#authorization {
-    position: absolute;
-    top: 0px;
-    right: 20px;
-}
+/*#authorization {*/
+/*position: absolute;*/
+/*top: 0px;*/
+/*right: 20px;*/
+/*}*/
 
 #exitButton {
     position: absolute;
     top: 50px;
     right: 20px;
+    display: none;
+}
+
+/*save display none*/
+#saveSvgButton {
     display: none;
 }

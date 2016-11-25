@@ -3,6 +3,8 @@
 <% include partial/svgPartial %>
 <% include partial/svg_copy/svgPartialCopy %>
 
+<script type="text/javascript" src="https://vk.com/js/api/share.js?94" charset="windows-1251"></script>
+
 <script src="components/Button.js"></script>
 <script src="components/Building.js"></script>
 <script src="components/TableColor.js"></script>
@@ -23,9 +25,21 @@
 <div id="authorization"></div>
 <button id="exitButton" onclick="exitFromAccount()"> Выйти </button>
 <button id="getSvgButton" onclick="getSvg()"> Сохранить svg </button>
-<button id="getCurrentStateButton" onclick="getCurrentState()"> Запуск чего-то </button>
+<button id="sendWallPostToVKButton" onclick="sendWallPostToVK()"> Отправить вконтакт </button>
 <button id="clearingButton" onclick="clearFilling()"> Очистить картинку </button>
 <button id="getUserImage" onclick="getUserImage()"> Получить свою картинку </button>
+<div id="tempDiv"></div>
+<!-- Put this script tag to the place, where the Share button will be -->
+<!--<script type="text/javascript">-->
+    <!--var per = "ABCD.html";-->
+    <!--document.write(VK.Share.button({url: "ABCDE"},{type: "round", text: "Поделиться"}));-->
+<!--</script>-->
+
+<!--<a href="//vk.com/share.php?url=mypage.ejs" onmouseup="this._btn=event.button;this.blur();" onclick="return VK.Share.click(0, this);" style="border: 0px; display: block; box-sizing: content-box; background: rgb(98, 135, 174); transition: background 200ms linear; border-radius: 2px 0px 0px 2px; padding: 2px 6px 4px; color: rgb(255, 255, 255);"><div style="background-size: 19px 59px;background-image: url('//vk.com/images/icons/like_widget.png');height: 8px;width: 14px;margin: 4px 0 3px;"></div></a>-->
+
+
+<script type="text/javascript" src="https://vk.com/js/api/share.js?94" charset="windows-1251"></script>
+
 <!--<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Поделиться</a></div>-->
 <!-- Put this script tag to the place, where the Share button will be -->
 <!--<script type="text/javascript">-->
@@ -35,7 +49,12 @@
 <br/><br/>
 <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
 <script src="//yastatic.net/share2/share.js"></script>
-<div class="ya-share2" data-services="collections,vkontakte,facebook,odnoklassniki,moimir"></div>
+<div class="ya-share2" data-url="getIndividualUrl()" data-services="vkontakte,facebook,odnoklassniki,moimir"></div>
+
+
+
+
+<!--<div class="ya-share2" data-services="collections,vkontakte,facebook,odnoklassniki,moimir"></div>-->
 <br/><br/><br/>
 
 
@@ -64,7 +83,7 @@
     var building2 = new Building('#main_copy');
 
     var Button = myApp.Button;
-    var button = new Button('#hideColors', '.table');
+    var button = new Button('#hideColors', '.table', '.logo', '.share', '.social','.connect','.social2');
 
     var uloginParameters = "";
     var currentState = "";
@@ -184,7 +203,7 @@
         //get svg source.
         var serializer = new XMLSerializer();
         var source = serializer.serializeToString(svg);
-        console.log(source);
+        //console.log(source);
     }
 
     function setCurrentState(currState){
@@ -227,10 +246,9 @@
 
             setTimeout(function(){
                 var location = '/individualSvgs?id=' + individualKey;
-                window.location.href = location;
+                //window.location.href = location;
+                return location;
             }, 1000);
-
-
         }, 1000); //можно увеличить таймер, если вдруг не успеет принять данные с сервера
 
 
@@ -262,4 +280,25 @@
         })
     }
 
+    function getIndividualUrl(){
+        return 'individualSvgs?id=' + individualKey;
+    }
+
+    function sendWallPostToVK(){
+        var url = "http://www." + getIndividualUrl();
+        alert(url);
+        var noteText = VK.Share.button({url: url}, {
+            type: "custom",
+            text: "<img src=\"https://vk.com/images/share_32_2x.png\" width=\"32\" height=\"32\" />"
+        });
+
+        $('#tempDiv').html(noteText);
+
+
+
+//        document.write(VK.Share.button({url: "http://" + url}, {
+//            type: "custom",
+//            text: "<img src=\"https://vk.com/images/share_32_2x.png\" width=\"32\" height=\"32\" />"
+//        }));
+    }
 </script>
