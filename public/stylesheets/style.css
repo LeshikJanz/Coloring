@@ -183,7 +183,7 @@ body .table {
 /* display none authorization*/
 
 #uLogin {
-    /*display: none;*/
+    display: none;
     position: absolute;
     top: 0px;
     right: 0px;

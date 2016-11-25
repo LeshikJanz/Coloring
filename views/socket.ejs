@@ -25,7 +25,7 @@
 <button id="getSvgButton" onclick="getSvg()"> Сохранить svg </button>
 <button id="getCurrentStateButton" onclick="getCurrentState()"> Запуск чего-то </button>
 <button id="clearingButton" onclick="clearFilling()"> Очистить картинку </button>
-<button id="fillUserImage" onclick="fillUserImage()"> Получить свою картинку </button>
+<button id="getUserImage" onclick="getUserImage()"> Получить свою картинку </button>
 <!--<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Поделиться</a></div>-->
 <!-- Put this script tag to the place, where the Share button will be -->
 <!--<script type="text/javascript">-->
@@ -209,7 +209,7 @@
         return false;
     }
 
-    function fillUserImage() { //получает картинку текущего пользователя
+    function getUserImage() { //получает картинку текущего пользователя
         getCurrentState();
         //console.log(currentState);
         //currentState = JSON.parse(currentState);
@@ -223,8 +223,17 @@
                 }
             }
             getSvg();
-            //sendRequestOnCreatingNewIndividualPage();  //доделать, чтобы отправлялись большие объемы
+            sendRequestOnCreatingNewIndividualPage();  //доделать, чтобы отправлялись большие объемы
+
+            setTimeout(function(){
+                var location = '/individualSvgs?id=' + individualKey;
+                window.location.href = location;
+            }, 1000);
+
+
         }, 1000); //можно увеличить таймер, если вдруг не успеет принять данные с сервера
+
+
     }
 
     function sendRequestOnCreatingNewIndividualPage(){
@@ -235,15 +244,15 @@
         var serializer = new XMLSerializer();
         var source = serializer.serializeToString(svg);
         var ajaxObj = {
-            svg: source
+            svg: source,
+            individualKey: individualKey
         }
-        ajaxObj = JSON.stringify(ajaxObj);
 
         $.ajax({
             url: "/createSvgFile",
             method: "POST",
-            data:  ajaxObj,
-            contentType: false,
+            data: JSON.stringify(ajaxObj),
+            contentType: "application/json",
             success: function(xhr){
                 console.log("Ajax has succeeded");
             },

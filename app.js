@@ -8,6 +8,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+
 //var webpack = require('webpack');
 //var webpackDevMiddleware = require('webpack-dev-middleware');
 //var webpackHotMiddleware = require('webpack-hot-middleware');
@@ -17,6 +18,8 @@ var io = require('socket.io')(http);
 
 var app = express(); //создаем объект сервера express со всеми нужными параметрами
 
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 //var compiler = webpack(wConfig);  //webpack
 //app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
 //app.use(webpackHotMiddleware(compiler));
